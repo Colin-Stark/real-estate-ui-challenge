@@ -36,9 +36,82 @@ class Description extends StatelessWidget {
                 width: cz.width,
                 child: Hero(
                   tag: 'loneimage',
-                  child: Image.network(
-                    imaglink,
-                    fit: BoxFit.cover,
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: Image.network(
+                          imaglink,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Align(
+                          alignment: Alignment.bottomRight,
+                          child: SizedBox(
+                            height: cz.height / 4,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: cz.width / 30),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                    height: cz.height / 15,
+                                    width: cz.width / 6,
+                                    decoration: BoxDecoration(
+                                      image: const DecorationImage(
+                                        image: NetworkImage(
+                                            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: cz.height / 15,
+                                    width: cz.width / 6,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      image: const DecorationImage(
+                                        image: NetworkImage(
+                                          "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=1984&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      ColorFiltered(
+                                        colorFilter: ColorFilter.mode(
+                                            Colors.black.withOpacity(0.6),
+                                            BlendMode.multiply),
+                                        child: Container(
+                                          height: cz.height / 15,
+                                          width: cz.width / 6,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: const DecorationImage(
+                                              image: NetworkImage(
+                                                "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        '+5',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: cz.height / 40,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ))
+                    ],
                   ),
                 ),
               ),
