@@ -14,7 +14,9 @@ class Homepage extends StatelessWidget {
       "Location": "Abu Dhabi, Dubai",
       "Price": 400.00,
       "payment-type": "Monthly",
-      "Star": 3.8
+      "Star": 3.8,
+      "description":
+          "Nestled in the vibrant city of Toronto, Canada, this property offers a perfect blend of comfort and style. The monthly rental rate is \$1500, providing an affordable and convenient living option. The accommodation boasts a commendable 4.0-Star rating, reflecting the quality and satisfaction it offers to residents. With a prime location and a visually appealing ambiance, this property is an ideal choice for those seeking a delightful living experience in Toronto."
     },
     {
       "imageLink":
@@ -32,7 +34,9 @@ class Homepage extends StatelessWidget {
       "Location": "North Carolina, USA",
       "Price": 800.00,
       "payment-type": "Monthly",
-      "Star": 4.4
+      "Star": 4.4,
+      "description":
+          "Nestled in the vibrant city of Toronto, Canada, this property offers a perfect blend of comfort and style. The monthly rental rate is \$1500, providing an affordable and convenient living option. The accommodation boasts a commendable 4.0-Star rating, reflecting the quality and satisfaction it offers to residents. With a prime location and a visually appealing ambiance, this property is an ideal choice for those seeking a delightful living experience in Toronto."
     },
     {
       "imageLink":
@@ -40,7 +44,9 @@ class Homepage extends StatelessWidget {
       "Location": "Santorini, Greece",
       "Price": 35000.00,
       "payment-type": "Yearly",
-      "Star": 4.7
+      "Star": 4.7,
+      "description":
+          "Nestled in the vibrant city of Toronto, Canada, this property offers a perfect blend of comfort and style. The monthly rental rate is \$1500, providing an affordable and convenient living option. The accommodation boasts a commendable 4.0-Star rating, reflecting the quality and satisfaction it offers to residents. With a prime location and a visually appealing ambiance, this property is an ideal choice for those seeking a delightful living experience in Toronto."
     },
     {
       "imageLink":
@@ -48,7 +54,9 @@ class Homepage extends StatelessWidget {
       "Location": "Miami florida, USA",
       "Price": 55000.00,
       "payment-type": "Yearly",
-      "Star": 5.0
+      "Star": 5.0,
+      "description":
+          "Nestled in the vibrant city of Toronto, Canada, this property offers a perfect blend of comfort and style. The monthly rental rate is \$1500, providing an affordable and convenient living option. The accommodation boasts a commendable 4.0-Star rating, reflecting the quality and satisfaction it offers to residents. With a prime location and a visually appealing ambiance, this property is an ideal choice for those seeking a delightful living experience in Toronto."
     },
     {
       "imageLink":
@@ -56,7 +64,9 @@ class Homepage extends StatelessWidget {
       "Location": "Birmingham, England",
       "Price": 45000.00,
       "payment-type": "Yearly",
-      "Star": 2.9
+      "Star": 2.9,
+      "description":
+          "Nestled in the vibrant city of Toronto, Canada, this property offers a perfect blend of comfort and style. The monthly rental rate is \$1500, providing an affordable and convenient living option. The accommodation boasts a commendable 4.0-Star rating, reflecting the quality and satisfaction it offers to residents. With a prime location and a visually appealing ambiance, this property is an ideal choice for those seeking a delightful living experience in Toronto."
     }
   ];
 
@@ -64,6 +74,24 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size cz = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        surfaceTintColor: Colors.white,
+        destinations: [
+          NavigationDestination(
+              icon: Icon(
+                Icons.home,
+                color: Color(tealColor),
+              ),
+              label: 'Home'),
+          const NavigationDestination(
+              icon: Icon(Icons.favorite_outline), label: 'Favourite'),
+          const NavigationDestination(
+              icon: Icon(Icons.settings_outlined), label: 'Settings'),
+          const NavigationDestination(
+              icon: Icon(Icons.person_outline), label: 'Profile'),
+        ],
+        indicatorColor: Colors.transparent,
+      ),
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade200,
@@ -283,6 +311,162 @@ class Homepage extends StatelessWidget {
                       ],
                     ),
                   ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Popular today',
+                    style: TextStyle(
+                      fontSize: cz.height / 48,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Others',
+                        style: TextStyle(
+                          color: Color(
+                            tealColor,
+                          ),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.expand_more,
+                        color: Color(
+                          tealColor,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: cz.height,
+                child: ListView.builder(
+                  itemCount: mydata.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: cz.height / 35,
+                      ),
+                      child: InkWell(
+                        onTap: () => Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Description(
+                              imaglink: mydata[index]["imageLink"],
+                              rating: mydata[index]["Star"],
+                              location: mydata[index]["Location"],
+                              descrip: mydata[index]["description"],
+                              price: mydata[index]["Price"],
+                            ),
+                          ),
+                          (route) => route.isFirst,
+                        ),
+                        child: Container(
+                          height: cz.height / 4,
+                          width: cz.width,
+                          color: Colors.white,
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Image.network(
+                                  mydata[index]["imageLink"],
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: FractionallySizedBox(
+                                  heightFactor: 0.33,
+                                  child: ClipRect(
+                                    child: BackdropFilter(
+                                      filter: ImageFilter.blur(
+                                        sigmaX: 5,
+                                        sigmaY: 5,
+                                      ),
+                                      child: Container(
+                                        width: cz.width,
+                                        color: Colors.black.withOpacity(0.3),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: cz.width / 20),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    mydata[index]["Location"],
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: cz.height / 55,
+                                                    ),
+                                                  ),
+                                                  ActionChip(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                    ),
+                                                    avatar: const Icon(
+                                                      Icons.star,
+                                                      color: Colors.orange,
+                                                    ),
+                                                    label: Text(
+                                                      mydata[index]["Star"]
+                                                          .toString(),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '\$ ${mydata[index]["Price"].toInt().toString()} / ${mydata[index]["payment-type"]}',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: cz.height / 55,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    '1 room mate',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: cz.height / 55,
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               )
             ],
